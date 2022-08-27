@@ -1,17 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import {FormBasicStyle } from "./Shared";
 
 const Deatils = () => {
+  const [details, setDetails] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phoneNumber: ''
+  })
+
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setDetails({ ...details, [e.target.name]: e.target.value})
+  }
   return (
     <FormBasicStyle>
-      <label htmlFor='example-input'>First name</label>
-      <input type='text' name='firstName' placeholder='John' />
-      <label htmlFor='example-input'>Last name</label>
-      <input type='text' name='lastName' placeholder='appleseed' />
-      <label htmlFor='example-input'>Email</label>
-      <input type='text' name='email' placeholder='johnappleseed@gmail.com' />
-      <label htmlFor='example-input'>Phone number</label>
-      <input type='text' name='phoneNumber' placeholder='0123456789' />
+      <label htmlFor='firstName'>First name</label>
+      <input type='text' name='firstName' id="firstName" placeholder='John' onChange={handleOnChange} />
+      <label htmlFor='lastName'>Last name</label>
+      <input type='text' name='lastName' id="lastName" placeholder='appleseed' onChange={handleOnChange} />
+      <label htmlFor='email'>Email</label>
+      <input type='text' name='email' id="email" placeholder='johnappleseed@gmail.com' onChange={handleOnChange} />
+      <label htmlFor='phoneNumber'>Phone number</label>
+      <input type='text' name='phoneNumber' id="phoneNumber" placeholder='0123456789' onChange={handleOnChange} />
       <button type='submit'>Go to Shipping</button>
     </FormBasicStyle>
   );
