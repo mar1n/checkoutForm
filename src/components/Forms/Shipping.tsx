@@ -1,8 +1,9 @@
 import React from "react";
+import { ButtonNeighbours, FormBasicStyle } from "./Shared";
 
 const Shipping = () => {
   return (
-    <form>
+    <FormBasicStyle>
       <label htmlFor='example-input'>Address</label>
       <input type='text' name='example-input' placeholder='1 brick lane' />
       <label htmlFor='example-input'>City</label>
@@ -13,9 +14,11 @@ const Shipping = () => {
       <input type='text' name='example-input' placeholder='England' />
       <label htmlFor='example-input'>Country</label>
       <input type='text' name='example-input' placeholder='United Kingdom' />
+      <ButtonNeighbours>
       <button>Go back</button>
       <button>Go to Payment</button>
-    </form>
+      </ButtonNeighbours>
+    </FormBasicStyle>
   );
 };
 

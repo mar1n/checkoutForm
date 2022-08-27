@@ -1,17 +1,9 @@
 import React from "react";
-import styled from "styled-components";
+import {FormBasicStyle } from "./Shared";
 
-const DetailsForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  width: 150px;
-  input {
-    background: tomato;
-  }
-`;
 const Deatils = () => {
   return (
-    <DetailsForm>
+    <FormBasicStyle>
       <label htmlFor='example-input'>First name</label>
       <input type='text' name='firstName' placeholder='John' />
       <label htmlFor='example-input'>Last name</label>
@@ -21,7 +13,7 @@ const Deatils = () => {
       <label htmlFor='example-input'>Phone number</label>
       <input type='text' name='phoneNumber' placeholder='0123456789' />
       <button type='submit'>Go to Shipping</button>
-    </DetailsForm>
+    </FormBasicStyle>
   );
 };
 
