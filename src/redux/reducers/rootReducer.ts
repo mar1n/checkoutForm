@@ -1,14 +1,12 @@
 // import { combineReducers } from "redux";
 
-
-const initialState = {}
+const initialState = {};
 
 const rootReducer = (state = initialState, action: any) => {
-  switch(action.type) {
-
+  switch (action.type) {
     default:
       return state;
   }
-}
+};
 
 export default rootReducer;

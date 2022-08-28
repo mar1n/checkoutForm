@@ -13,6 +13,6 @@ const paymentSlice = createSlice({
   },
 });
 
-export default paymentSlice.reducer
+export default paymentSlice.reducer;
 
 export const { paymentUpdate } = paymentSlice.actions;

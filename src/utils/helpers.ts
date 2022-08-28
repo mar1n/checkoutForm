@@ -17,5 +17,11 @@ export const initialStatePayment = {
   nameOnCard: "",
   cardNumber: "",
   cw: "",
-  exporationDate: "",
+  expirationDate: "",
+};
+
+export const initialStateStepper = {
+  details: true,
+  shipping: false,
+  payment: false,
 };

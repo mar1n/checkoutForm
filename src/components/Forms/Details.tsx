@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import { FormBasicStyle } from "./Shared";
-import { useDispatch } from "react-redux";
-import { detailsUpdate } from "../../redux/reducers/deatilsSlice";
-import { initialStateDetails } from "../../utils/helpers";
+import React from "react";
+import { FormBasicStyle, GoToButton } from "../Shared";
+import { useDispatch, useSelector } from "react-redux";
+import { detailsUpdate } from "../../redux/reducers/detailsSlice";
+import { stepperUpdate } from "../../redux/reducers/stepperSlice";
+import { RootState } from "../../redux/store";
 
 const Details = () => {
-  const [details, setDetails] = useState(initialStateDetails);
-
-  const { firstName, lastName, email, phoneNumber } = details;
   const dispatch = useDispatch();
+  const details = useSelector((state: RootState) => state.details);
+  const { firstName, lastName, email, phoneNumber } = details;
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDetails({ ...details, [e.target.name]: e.target.value });
+    dispatch(detailsUpdate({ ...details, [e.target.name]: e.target.value }));
   };
   const onSaveDetailsClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -24,7 +24,12 @@ const Details = () => {
           phoneNumber,
         })
       );
-      setDetails(initialStateDetails);
+      dispatch(
+        stepperUpdate({
+          details: false,
+          shipping: true,
+        })
+      );
     }
   };
   const canSave =
@@ -33,43 +38,50 @@ const Details = () => {
     Boolean(email) &&
     Boolean(phoneNumber);
   return (
-    <FormBasicStyle>
-      <label htmlFor='firstName'>First name</label>
-      <input
-        type='text'
-        name='firstName'
-        id='firstName'
-        placeholder='John'
-        onChange={handleOnChange}
-      />
-      <label htmlFor='lastName'>Last name</label>
-      <input
-        type='text'
-        name='lastName'
-        id='lastName'
-        placeholder='appleseed'
-        onChange={handleOnChange}
-      />
-      <label htmlFor='email'>Email</label>
-      <input
-        type='text'
-        name='email'
-        id='email'
-        placeholder='johnappleseed@gmail.com'
-        onChange={handleOnChange}
-      />
-      <label htmlFor='phoneNumber'>Phone number</label>
-      <input
-        type='text'
-        name='phoneNumber'
-        id='phoneNumber'
-        placeholder='0123456789'
-        onChange={handleOnChange}
-      />
-      <button type='submit' onClick={onSaveDetailsClick} disabled={!canSave}>
-        Go to Shipping
-      </button>
-    </FormBasicStyle>
+    <>
+      <h3>Details Form</h3>
+      <FormBasicStyle>
+        <label htmlFor='firstName'>First name</label>
+        <input
+          type='text'
+          name='firstName'
+          id='firstName'
+          placeholder='John'
+          value={firstName}
+          onChange={handleOnChange}
+        />
+        <label htmlFor='lastName'>Last name</label>
+        <input
+          type='text'
+          name='lastName'
+          id='lastName'
+          placeholder='appleseed'
+          value={lastName}
+          onChange={handleOnChange}
+        />
+        <label htmlFor='email'>Email</label>
+        <input
+          type='text'
+          name='email'
+          id='email'
+          placeholder='johnappleseed@gmail.com'
+          value={email}
+          onChange={handleOnChange}
+        />
+        <label htmlFor='phoneNumber'>Phone number</label>
+        <input
+          type='text'
+          name='phoneNumber'
+          id='phoneNumber'
+          placeholder='0123456789'
+          value={phoneNumber}
+          onChange={handleOnChange}
+        />
+        <GoToButton onClick={onSaveDetailsClick} disabled={!canSave} ready={canSave}>
+          Go to Shipping
+        </GoToButton>
+      </FormBasicStyle>
+    </>
   );
 };
 
