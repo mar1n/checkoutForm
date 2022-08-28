@@ -11,10 +11,14 @@
 
 // const store = createStore(rootReducer, undefined, composedEnhancers);
 import { configureStore } from "@reduxjs/toolkit";
-import testReducer from "./reducers/rootReducer";
+import detailsReducer from "./reducers/deatilsSlice";
+import shippingReducer from "./reducers/shippingSlice";
+import paymentReducer from "./reducers/paymentSlice";
 
 export default configureStore({
     reducer: {
-        test: testReducer
+        deatails: detailsReducer,
+        shipping: shippingReducer,
+        payment: paymentReducer
     }
 });

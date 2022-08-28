@@ -1,9 +1,7 @@
 import React from "react";
-import Details from "./Forms/Deatils";
+import Details from "./Forms/Details";
 import Shipping from "./Forms/Shipping";
 import Payment from "./Forms/Payment";
-
-
 
 const Main = () => {
   return (

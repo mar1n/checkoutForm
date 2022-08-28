@@ -1,17 +1,37 @@
 import React, { useState } from "react";
 import { ButtonNeighbours, FormBasicStyle } from "./Shared";
-
+import { useDispatch } from "react-redux";
+import { paymentUpdate } from "../../redux/reducers/paymentSlice";
+import { initialStatePayment } from "../../utils/helpers";
 
 const Payment = () => {
-  const [payment, setPayment] = useState({
-    nameOnCard: '',
-    cardNumber: '',
-    cw: '',
-    exporationDate: ''
-  })
+  const [payment, setPayment] = useState(initialStatePayment);
+
+  const { nameOnCard, cardNumber, cw, exporationDate } = payment;
+  const dispatch = useDispatch();
+
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPayment({...payment, [e.target.name]: e.target.value })
   }
+  const onSavePaymentClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (nameOnCard && cardNumber && cw && exporationDate) {
+      dispatch(
+        paymentUpdate({
+          nameOnCard,
+          cardNumber,
+          cw,
+          exporationDate,
+        })
+      );
+      setPayment(initialStatePayment);
+    }
+  };
+  const canSave =
+    Boolean(nameOnCard) &&
+    Boolean(cardNumber) &&
+    Boolean(cw) &&
+    Boolean(exporationDate);
   return (
     <FormBasicStyle>
       <div>
@@ -38,7 +58,7 @@ const Payment = () => {
       </div>
       <ButtonNeighbours>
         <button>Go back</button>
-        <button type='submit'>Submit</button>
+        <button type='submit' onClick={onSavePaymentClick} disabled={!canSave} >Submit</button>
       </ButtonNeighbours>
     </FormBasicStyle>
   );
